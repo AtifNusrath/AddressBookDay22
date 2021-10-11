@@ -29,17 +29,13 @@ public class AddressBook {
         person.setState(scanner.next());
         System.out.println("Enter zip: ");
         person.setZipCode(scanner.nextInt());
-
         person.setAddressObj(person);
-
         persons.add(person);
-
         System.out.println();
         System.out.println("Person added");
         counter++;
 
     }
-
 
     static void editContactPerson() {
         if (counter > 0) {
@@ -59,7 +55,7 @@ public class AddressBook {
 
                 System.out.print("\nEnter new address: ");
                 persons.get(indexOfPerson).getAddressObj().setAddress(scanner.next());
-                System.out.println("Enter new city searchName: ");
+                System.out.println("Enter new city for searchName: ");
                 persons.get(indexOfPerson).getAddressObj().setCity(scanner.next());
                 System.out.println("Enter new zip: ");
                 persons.get(indexOfPerson).getAddressObj().setZipCode(scanner.nextInt());
@@ -77,6 +73,30 @@ public class AddressBook {
             System.out.println("There is no record to edit");
 
     }
+    public static void deletePerson() {
+        if (counter > 0) {
+            System.out.println("Enter Persons FirstName you want to delete: ");
+            String searchName = scanner.next();
+            indexOfPerson = 0;
+            boolean isFoundPerson = false;
+
+            for (int i = 0; i < persons.size(); i++) {
+                if (persons.get(i).getFirstName().equals(searchName)) {
+                    isFoundPerson = true;
+                    indexOfPerson = i;
+                    break;
+                }
+            }
+            if (isFoundPerson) {
+                persons.remove(indexOfPerson);
+                counter--;
+                System.out.println();
+                System.out.println("Delete completed");
+            } else
+                System.out.println("No person found with this number");
+        } else
+            System.out.println("No records to delete");
+    }
 
     static void menu() {
         int choice;
@@ -92,12 +112,15 @@ public class AddressBook {
                     editContactPerson();
                     break;
                 case 3:
+                    deletePerson();
+                    break;
+                case 4:
                     System.out.println(persons);
                     break;
                 default:
-                    System.out.println("Enter number from 1 to 3");
+                    System.out.println("Enter number from 1 to 4");
             }
-        } while (choice < 4);
+        } while (choice < 5);
     }
 
     public static void main(String[] args) {

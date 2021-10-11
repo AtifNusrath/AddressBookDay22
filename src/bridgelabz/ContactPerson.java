@@ -65,6 +65,7 @@ public class ContactPerson {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
     public ContactPerson getAddressObj() {
         return addressObj;
     }
@@ -75,8 +76,8 @@ public class ContactPerson {
 
     @Override
     public String toString() {
-        return "\npersonInfo [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", city="
-                + city + ", state=" + state + ", zipcode=" + zipCode + ", phoneNumber=" + phoneNumber + "]\n";
+        return "\n" + "personInfo [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", city="
+                + city + ", state=" + state + ", zipcode=" + zipCode + ", phoneNumber=" + phoneNumber + "]" + "\n";
     }
 
 }
