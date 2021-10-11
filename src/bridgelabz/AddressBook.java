@@ -34,8 +34,13 @@ public class AddressBook {
         System.out.println();
         System.out.println("Person added");
         counter++;
-
     }
+
+    public void display() {
+        for (ContactPerson person : persons)
+            System.out.println(person);
+    }
+
 
     static void editContactPerson() {
         if (counter > 0) {
@@ -93,37 +98,8 @@ public class AddressBook {
                 System.out.println();
                 System.out.println("Delete completed");
             } else
-                System.out.println("No person found with this number");
+                System.out.println("No person found with this name");
         } else
             System.out.println("No records to delete");
-    }
-
-    static void menu() {
-        int choice;
-        do {
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Enter ur choice 1: Add \n 2: Edit \n 3: Display Details  ");
-            choice = sc.nextInt();
-            switch (choice) {
-                case 1:
-                    readData();
-                    break;
-                case 2:
-                    editContactPerson();
-                    break;
-                case 3:
-                    deletePerson();
-                    break;
-                case 4:
-                    System.out.println(persons);
-                    break;
-                default:
-                    System.out.println("Enter number from 1 to 4");
-            }
-        } while (choice < 5);
-    }
-
-    public static void main(String[] args) {
-        menu();
     }
 }
