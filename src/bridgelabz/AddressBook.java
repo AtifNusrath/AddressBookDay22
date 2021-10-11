@@ -1,7 +1,9 @@
 package bridgelabz;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class AddressBook {
     static ArrayList<ContactPerson> persons = new ArrayList<>();
@@ -119,6 +121,24 @@ public class AddressBook {
             }
         }
         return flag == 1;
+    }
+    public void getPersonNameByState(String State) {
+        List<ContactPerson> list = persons.stream().filter(contactName -> contactName.getState().equals(State))
+                .collect(Collectors.toList());
+        for (ContactPerson contact : list) {
+            System.out.println("First Name: " + contact.getFirstName());
+            System.out.println("Last Name: " + contact.getLastName());
+        }
+
+    }
+
+    public void getPersonNameByCity(String cityName) {
+        List<ContactPerson> list = persons.stream().filter(contactName -> contactName.getCity().equals(cityName))
+                .collect(Collectors.toList());
+        for (ContactPerson contact : list) {
+            System.out.println("First Name: " + contact.getFirstName());
+            System.out.println("Last Name: " + contact.getLastName());
+        }
     }
 }
 
