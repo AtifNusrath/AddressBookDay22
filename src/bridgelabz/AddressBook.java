@@ -13,32 +13,37 @@ public class AddressBook {
     public static void readData() {
         System.out.println("Add person details...");
         ContactPerson person = new ContactPerson();
-
         System.out.println("Enter person first name: ");
         person.setFirstName(scanner.next());
-        System.out.println("Enter person last name: ");
-        person.setLastName(scanner.next());
-        System.out.println("Enter mobile number: ");
-        person.setPhoneNumber(scanner.next());
-        System.out.println("Enter address Details: ");
-        System.out.println("Enter address: ");
-        person.setAddress(scanner.next());
-        System.out.println("Enter city: ");
-        person.setCity(scanner.next());
-        System.out.println("Enter State name: ");
-        person.setState(scanner.next());
-        System.out.println("Enter zip: ");
-        person.setZipCode(scanner.nextInt());
-        person.setAddressObj(person);
-        persons.add(person);
-        System.out.println();
-        System.out.println("Person added");
-        counter++;
+        String result = person.getFirstName();
+        boolean flag = checkDuplicate(result);
+        if (flag) {
+            System.out.println("Person is already exist");
+        } else {
+            System.out.println("Enter person last name: ");
+            person.setLastName(scanner.next());
+            System.out.println("Enter mobile number: ");
+            person.setPhoneNumber(scanner.next());
+            System.out.println("Enter address Details: ");
+            System.out.println("Enter address: ");
+            person.setAddress(scanner.next());
+            System.out.println("Enter city: ");
+            person.setCity(scanner.next());
+            System.out.println("Enter State name: ");
+            person.setState(scanner.next());
+            System.out.println("Enter zip: ");
+            person.setZipCode(scanner.nextInt());
+            person.setAddressObj(person);
+            persons.add(person);
+            System.out.println();
+            System.out.println("Person added");
+            counter++;
+        }
     }
 
     public void display() {
-        for (ContactPerson person : persons)
-            System.out.println(person);
+        for (ContactPerson person2 : persons)
+            System.out.println(person2);
     }
 
 
@@ -78,6 +83,7 @@ public class AddressBook {
             System.out.println("There is no record to edit");
 
     }
+
     public static void deletePerson() {
         if (counter > 0) {
             System.out.println("Enter Persons FirstName you want to delete: ");
@@ -102,4 +108,17 @@ public class AddressBook {
         } else
             System.out.println("No records to delete");
     }
+
+
+    private static boolean checkDuplicate(String fname) {
+        int flag = 0;
+        for (ContactPerson person1 : persons) {
+            if (person1.getFirstName().equals(fname)) {
+                flag = 1;
+                break;
+            }
+        }
+        return flag == 1;
+    }
 }
+
