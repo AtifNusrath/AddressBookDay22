@@ -17,7 +17,8 @@ public class AddressBookClass {
             System.out.println("1.Add Contact");
             System.out.println("2.Edit Contact");
             System.out.println("3.Delete");
-            System.out.println("4.Exit");
+            System.out.println("4.Display");
+            System.out.println("5.Exit");
             System.out.println("Enter Choice: ");
 
             int option = sc.nextInt();
@@ -28,7 +29,7 @@ public class AddressBookClass {
                     break;
 
                 case 2:
-                     addressBook.editContactPerson();
+                    addressBook.editContactPerson();
                     break;
 
                 case 3:
@@ -36,6 +37,10 @@ public class AddressBookClass {
                     break;
 
                 case 4:
+                    addressBook.display();
+                    break;
+
+                case 5:
                     flag = false;
                     break;
             }
@@ -60,7 +65,7 @@ public class AddressBookClass {
         }
     }
 
-    private void viewPersonByStateUsingHashmap(String stateName) {
+    private void viewPersonByState(String stateName) {
         for (Map.Entry<String, AddressBook> entry : addressBookListMap.entrySet()) {
             AddressBook value = entry.getValue();
             ArrayList<ContactPerson> contacts = value.personByState.entrySet().stream()
@@ -72,7 +77,7 @@ public class AddressBookClass {
         }
     }
 
-    private void viewPersonByCityUsingHashMap(String cityName) {
+    private void viewPersonByCity(String cityName) {
         for (Map.Entry<String, AddressBook> entry : addressBookListMap.entrySet()) {
             AddressBook value = entry.getValue();
             ArrayList<ContactPerson> contacts = value.personByCity.entrySet().stream()
@@ -83,6 +88,36 @@ public class AddressBookClass {
             }
         }
     }
+
+    public void CountByState(String state) {
+        int count = 0;
+        for (Map.Entry<String, AddressBook> entry : addressBookListMap.entrySet()) {
+            for (int i = 0; i < (entry.getValue()).persons.size(); i++) {
+                ContactPerson contact = entry.getValue().persons.get(i);
+
+                if (state.equals(contact.getState())) {
+                    count++;
+                }
+            }
+        }
+        System.out.println("Total Person Count in state " + state + ": " + count);
+    }
+
+    public void CountByCity(String city) {
+        int countPersonInCity = 0;
+        for (Map.Entry<String, AddressBook> entry : addressBookListMap.entrySet()) {
+            for (int i = 0; i < (entry.getValue()).persons.size(); i++) {
+                ContactPerson d = entry.getValue().persons.get(i);
+
+                if (city.equals(d.getCity())) {
+                    countPersonInCity++;
+                }
+
+            }
+        }
+        System.out.println("Total number of people in this city " + city + ": " + countPersonInCity);
+    }
+
     public static void main(String[] args) {
         System.out.println("Welcome to the Address Book Management System using Java Stream");
         AddressBookClass addressBookClass = new AddressBookClass();
@@ -94,7 +129,9 @@ public class AddressBookClass {
                 System.out.println("3.Search Contact from a State");
                 System.out.println("4.View contact By State Using State and Person HashMap");
                 System.out.println("5.View Contact by city Using City and Person HashMap");
-                System.out.println("6.Exit");
+                System.out.println("6.Count Contact By State");
+                System.out.println("7.Count Contact By City");
+                System.out.println("8.Exit");
 
                 System.out.println("Enter choice: ");
                 int option = sc.nextInt();
@@ -126,16 +163,28 @@ public class AddressBookClass {
                     case 4:
                         System.out.println("Enter Name of State: ");
                         String stateName1 = sc.next();
-                        addressBookClass.viewPersonByStateUsingHashmap(stateName1);
+                        addressBookClass.viewPersonByState(stateName1);
                         break;
 
                     case 5:
                         System.out.println("Enter Name of City: ");
                         String cityName1 = sc.next();
-                        addressBookClass.viewPersonByCityUsingHashMap(cityName1);
+                        addressBookClass.viewPersonByCity(cityName1);
                         break;
 
                     case 6:
+                        System.out.println("Enter Name of State: ");
+                        String stateName2 = sc.next();
+                        addressBookClass.CountByState(stateName2);
+                        break;
+
+                    case 7:
+                        System.out.println("Enter Name of City: ");
+                        String cityName2 = sc.next();
+                        addressBookClass.CountByCity(cityName2);
+                        break;
+
+                    case 8:
                         flag = false;
                         break;
                 }
