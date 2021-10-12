@@ -1,18 +1,25 @@
 package bridgelabz;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class AddressBook {
     static ArrayList<ContactPerson> persons = new ArrayList<>();
+    public static HashMap<String, ArrayList<ContactPerson>> personByState;
+    public static HashMap<String, ArrayList<ContactPerson>> personByCity;
     static Scanner scanner = new Scanner(System.in);
     static int counter;
     private static int indexOfPerson;
 
+    public AddressBook() {
+        personByCity = new HashMap<String, ArrayList<ContactPerson>>();
+        personByState = new HashMap<String, ArrayList<ContactPerson>>();
+    }
 
-    public static void readData() {
+    public static ArrayList<ContactPerson> readData() {
         System.out.println("Add person details...");
         ContactPerson person = new ContactPerson();
         System.out.println("Enter person first name: ");
@@ -40,7 +47,19 @@ public class AddressBook {
             System.out.println();
             System.out.println("Person added");
             counter++;
+
+            if (!personByState.containsKey(person.getState())) {
+                personByState.put(person.getState(), new ArrayList<ContactPerson>());
+            }
+            personByState.get(person.getState()).add(person);
+
+            if (!personByCity.containsKey(person.getCity())) {
+                personByCity.put(person.getCity(), new ArrayList<ContactPerson>());
+            }
+            personByCity.get(person.getCity()).add(person);
+
         }
+        return persons;
     }
 
     public void display() {
@@ -122,6 +141,7 @@ public class AddressBook {
         }
         return flag == 1;
     }
+
     public void getPersonNameByState(String State) {
         List<ContactPerson> list = persons.stream().filter(contactName -> contactName.getState().equals(State))
                 .collect(Collectors.toList());

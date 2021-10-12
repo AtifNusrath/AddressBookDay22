@@ -10,6 +10,7 @@ public class ContactPerson {
     private String phoneNumber;
     private ContactPerson addressObj;
 
+
     public String getFirstName() {
         return firstName;
     }
