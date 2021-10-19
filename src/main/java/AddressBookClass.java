@@ -1,5 +1,7 @@
-package bridgelabz;
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -220,7 +222,9 @@ public class AddressBookClass {
                 System.out.println("11.Sort Contact By ZipCode");
                 System.out.println("12.Write data to file");
                 System.out.println("13.Read data from file");
-                System.out.println("14.Exit");
+                System.out.println("14.Write Data in CSV file");
+                System.out.println("15.Read data from CSV file");
+                System.out.println("16.Exit");
 
                 System.out.println("Enter choice: ");
                 int option = sc.nextInt();
@@ -298,8 +302,23 @@ public class AddressBookClass {
                     case 13:
                         AddressBook.readFileData();
                         break;
-
                     case 14:
+                        try {
+                            AddressBook.writeDataToCSV();
+                        } catch (IOException | CsvDataTypeMismatchException | CsvRequiredFieldEmptyException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+
+                    case 15:
+                        try {
+                            AddressBook.readDataUsingCSV();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+
+                    case 16:
                         flag = false;
                         break;
                 }

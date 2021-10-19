@@ -1,5 +1,3 @@
-package bridgelabz;
-
 public class ContactPerson {
     private String firstName;
     private String lastName;
@@ -67,13 +65,16 @@ public class ContactPerson {
         this.phoneNumber = phoneNumber;
     }
 
-    public ContactPerson getAddressObj() {
-        return addressObj;
-    }
+    //public ContactPerson getAddressObj() {
+      //  return addressObj;
+   // }
 
-    public void setAddressObj(ContactPerson addressObj) {
-        this.addressObj = addressObj;
-    }
+//    public void setAddressObj(ContactPerson addressObj) {
+//        this.addressObj = addressObj;
+ //
+    //
+    //
+    //   }
 
     @Override
     public String toString() {
