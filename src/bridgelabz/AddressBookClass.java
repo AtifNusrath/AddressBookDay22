@@ -158,6 +158,47 @@ public class AddressBookClass {
         }
     }
 
+    void sortByState() {
+        for (Map.Entry<String, AddressBook> entry : addressBookListMap.entrySet()) {
+            AddressBook value = entry.getValue();
+            List<ContactPerson> sortedList = value.persons.stream()
+                    .sorted(Comparator.comparing(ContactPerson::getState)).collect(Collectors.toList());
+
+            for (ContactPerson contact : sortedList) {
+                System.out.println("First Name: " + contact.getFirstName());
+                System.out.println("Last Name: " + contact.getLastName());
+                System.out.println("-------------------------------");
+            }
+        }
+    }
+
+    public void sortByCity() {
+        for (Map.Entry<String, AddressBook> entry : addressBookListMap.entrySet()) {
+            AddressBook value = entry.getValue();
+            List<ContactPerson> sortedList = value.persons.stream()
+                    .sorted(Comparator.comparing(ContactPerson::getCity)).collect(Collectors.toList());
+
+            for (ContactPerson contact : sortedList) {
+                System.out.println("First Name: " + contact.getFirstName());
+                System.out.println("Last Name: " + contact.getLastName());
+                System.out.println("-------------------------------");
+            }
+        }
+    }
+
+    public void sortByZipCode() {
+        for (Map.Entry<String, AddressBook> entry : addressBookListMap.entrySet()) {
+            AddressBook value = entry.getValue();
+            List<ContactPerson> sortedList = value.persons.stream()
+                    .sorted(Comparator.comparing(ContactPerson::getZipCode)).collect(Collectors.toList());
+
+            for (ContactPerson contact : sortedList) {
+                System.out.println("First Name: " + contact.getFirstName());
+                System.out.println("Last Name: " + contact.getLastName());
+                System.out.println("-------------------------------");
+            }
+        }
+    }
 
     public static void main(String[] args) {
         System.out.println("Welcome to the Address Book Management System using Java Stream");
@@ -173,7 +214,10 @@ public class AddressBookClass {
                 System.out.println("6.Count Contact By State");
                 System.out.println("7.Count Contact By City");
                 System.out.println("8.Sort Contact By Name");
-                System.out.println("9.Exit");
+                System.out.println("9.Sort Contact By City");
+                System.out.println("10.Sort Contact By State");
+                System.out.println("11.Sort Contact By ZipCode");
+                System.out.println("12.Exit");
 
                 System.out.println("Enter choice: ");
                 int option = sc.nextInt();
@@ -226,16 +270,30 @@ public class AddressBookClass {
                         break;
 
                     case 8:
-                        System.out.println("Sort Contact");
+                        System.out.println("Sort Contact by name");
                         addressBookClass.sortByName();
                         break;
 
                     case 9:
+                        System.out.println("Sort Contact by City");
+                        addressBookClass.sortByCity();
+                        break;
+
+                    case 10:
+                        System.out.println("Sort Contact by State");
+                        addressBookClass.sortByState();
+                        break;
+
+                    case 11:
+                        System.out.println("Sort Contact by ZipCode");
+                        addressBookClass.sortByZipCode();
+                        break;
+
+                    case 12:
                         flag = false;
                         break;
                 }
             }
-
         }
     }
 }

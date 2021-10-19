@@ -15,8 +15,8 @@ public class AddressBook {
     private static int indexOfPerson;
 
     public AddressBook() {
-        personByCity = new HashMap<String, ArrayList<ContactPerson>>();
-        personByState = new HashMap<String, ArrayList<ContactPerson>>();
+        personByCity = new HashMap<>();
+        personByState = new HashMap<>();
     }
 
     public static ArrayList<ContactPerson> readData() {
