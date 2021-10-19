@@ -200,6 +200,7 @@ public class AddressBookClass {
         }
     }
 
+
     public static void main(String[] args) {
         System.out.println("Welcome to the Address Book Management System using Java Stream");
         AddressBookClass addressBookClass = new AddressBookClass();
@@ -217,7 +218,9 @@ public class AddressBookClass {
                 System.out.println("9.Sort Contact By City");
                 System.out.println("10.Sort Contact By State");
                 System.out.println("11.Sort Contact By ZipCode");
-                System.out.println("12.Exit");
+                System.out.println("12.Write data to file");
+                System.out.println("13.Read data from file");
+                System.out.println("14.Exit");
 
                 System.out.println("Enter choice: ");
                 int option = sc.nextInt();
@@ -290,6 +293,13 @@ public class AddressBookClass {
                         break;
 
                     case 12:
+                        AddressBook.writeData();
+                        break;
+                    case 13:
+                        AddressBook.readFileData();
+                        break;
+
+                    case 14:
                         flag = false;
                         break;
                 }

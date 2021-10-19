@@ -1,5 +1,9 @@
 package bridgelabz;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +17,7 @@ public class AddressBook {
     static Scanner scanner = new Scanner(System.in);
     static int counter;
     private static int indexOfPerson;
+
 
     public AddressBook() {
         personByCity = new HashMap<>();
@@ -158,6 +163,31 @@ public class AddressBook {
         for (ContactPerson contact : list) {
             System.out.println("First Name: " + contact.getFirstName());
             System.out.println("Last Name: " + contact.getLastName());
+        }
+    }
+
+    public static void writeData() {
+        StringBuffer personBuffer = new StringBuffer();
+        persons.forEach(person -> {
+            String personDataString = person.toString().concat("\n");
+            personBuffer.append(personDataString);
+        });
+        try {
+            Files.write(Paths.get("Data.txt"), personBuffer.toString().getBytes());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+    }
+
+    public static void readFileData() {
+        try {
+            Files.lines(new File("Data.txt").toPath()).map(String::trim).forEach(System.out::println);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
         }
     }
 }
