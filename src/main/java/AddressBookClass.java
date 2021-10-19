@@ -224,7 +224,9 @@ public class AddressBookClass {
                 System.out.println("13.Read data from file");
                 System.out.println("14.Write Data in CSV file");
                 System.out.println("15.Read data from CSV file");
-                System.out.println("16.Exit");
+                System.out.println("16.Write Data in the Json file");
+                System.out.println("17.Read data from Json file ");
+                System.out.println("18.Exit");
 
                 System.out.println("Enter choice: ");
                 int option = sc.nextInt();
@@ -319,6 +321,22 @@ public class AddressBookClass {
                         break;
 
                     case 16:
+                        try {
+                            AddressBook.writeDataInJSon();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+
+                    case 17:
+                        try {
+                            AddressBook.readDataFromJson();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+
+                    case 18:
                         flag = false;
                         break;
                 }
