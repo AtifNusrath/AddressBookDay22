@@ -1,0 +1,45 @@
+#UC!
+CREATE DATABASE address_book;
+
+USE address_book;
+#UC2
+CREATE TABLE person  (id int AUTO_INCREMENT, firstName varchar(50) NOT NULL, lastName varchar(50) NOT NULL,
+                        mobileNumber varchar(20) NOT NULL,email varchar(50) NOT NULL, city varchar(50) NOT NULL, state varchar(50) NOT NULL,
+                        zip long NOT NULL, PRIMARY KEY(id));
+
+
+#UC3
+INSERT INTO person(firstName,lastName,mobileNumber,email,city,state,zip) VALUES
+                    ('Mohammed','Atif','9854712563','abc@gmail.com','Bangalore','Karnataka',560039),
+                    ('Salman','Khan','9652314750','xyz@gmail.com','Bangalore','Karnataka',560001),
+                    ('xyz','abc','8523697412','bca@gmail.com','Bangalore','Karnataka',560002);
+
+SELECT * FROM person;
+
+#UC4
+UPDATE person set MobileNumber= "8547120325" where FirstName='Mohammed';
+UPDATE person set Zip= "560010" where FirstName='Mohammed';
+UPDATE person set State= 'Telangana' where FirstName='Mohammed';
+UPDATE person set City= 'Hyderabad' where FirstName='Mohammed';
+
+#UC5
+DELETE from person where FirstName='Mohammed';
+
+SELECT * FROM person WHERE firstName = 'Mohammed';
+
+#UC6
+SELECT * from person where city = 'Bangalore';
+SELECT * from person where state = 'Karnataka';
+
+#UC7
+SELECT city,COUNT(city) as count from person group by city;
+SELECT state,COUNT(state) as count from person group by state;
+
+#UC8
+SELECT firstName,lastName from person ORDER BY city;
+
+#UC9
+
+
+
+
