@@ -1,3 +1,0 @@
-
-personInfo [firstName=atif, lastName=mohammed, address=gghali, city=bangalore, state=karnataka, zipcode=560039, phoneNumber=9874562012]
-
