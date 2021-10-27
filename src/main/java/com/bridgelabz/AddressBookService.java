@@ -2,10 +2,10 @@ package com.bridgelabz;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 public class AddressBookService {
     private List<AddressBookData> addressBookList;
-
     public enum IOService {DB_IO}
     private static AddressBookDBService addressBookDBService;
 
@@ -48,4 +48,17 @@ public class AddressBookService {
         return null;
     }
 
+    public Map<String, Double> contactsByCity(IOService ioService) {
+            if (ioService.equals(IOService.DB_IO)) {
+                return addressBookDBService.getCountOfContactsByCity();
+            }
+            return null;
+    }
+    public Map<String, Double> contactsByState(IOService ioService) {
+        if (ioService.equals(IOService.DB_IO)) {
+            return addressBookDBService.getCountOfContactsByState();
+        }
+        return null;
+    }
 }
+
