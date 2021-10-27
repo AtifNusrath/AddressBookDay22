@@ -62,7 +62,8 @@ public class AddressBookDBService {
                 String city = resultSet.getString("city");
                 String state = resultSet.getString("state");
                 String zip = resultSet.getString("zip");
-                addressBookList.add(new AddressBookData(typeId, firstName, lastName, phoneNumber, email, city, state, zip));
+                LocalDate date_added = resultSet.getDate("date_added").toLocalDate();
+                addressBookList.add(new AddressBookData(typeId,firstName,lastName,phoneNumber,email,city,state,zip,date_added ));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -141,5 +142,39 @@ public class AddressBookDBService {
             e.printStackTrace();
         }
         return countOfContacts;
+    }
+
+    public AddressBookData addNewContact(String type, String firstName, String lastName, String mobileNumber,
+                                         String email, String city, String state, String zip, LocalDate localDate) {
+        Connection connection = null;
+        AddressBookData addressBookData=null;
+        try {
+            connection = this.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try (Statement statement = connection.createStatement()) {
+            String sql = String.format("INSERT INTO addressbook (`type`,`firstName`,`lastName`,`mobileNumber`,`email`,`city`,`state`,`zip`,`date_added`) " +
+                                         " VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s')",
+                                            type,firstName,lastName,mobileNumber,email,city,state,zip,Date.valueOf(localDate));
+            System.out.println(sql+" sql");
+            int rowAffected = statement.executeUpdate(sql);
+            if (rowAffected == 1) {
+                addressBookData = new AddressBookData(type,firstName,lastName,mobileNumber,email,city,state,zip,localDate);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+        finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return addressBookData;
     }
 }

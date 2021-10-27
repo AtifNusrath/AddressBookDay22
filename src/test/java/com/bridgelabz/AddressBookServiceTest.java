@@ -56,4 +56,14 @@ public class AddressBookServiceTest {
         Assert.assertTrue(contactsByState.containsKey("Karnataka") &&
                 contactsByState.containsValue(2.0));
     }
+
+    @Test
+    public void givenNewContact_ShouldAddIntoTheAddressBookDataBase() {
+        AddressBookService addressBookService = new AddressBookService();
+        addressBookService.readAddressBookData(DB_IO);
+        addressBookService.addNewContact("Rahul","KL","Family",
+                "9632587412","Bangalore","Karnataka","560002","rahul@gmail.com",LocalDate.now());
+        boolean result = addressBookService.checkRecordSyncWithDB("Rahul");
+        Assert.assertTrue(result);
+    }
 }
