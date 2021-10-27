@@ -48,7 +48,7 @@ public class AddressBookServiceTest {
     }
 
     @Test
-    public void givenCity_ShouldRetrieveTheNumberOfContacts_BasedOnState() {
+    public void givenState_ShouldRetrieveTheNumberOfContacts_BasedOnState() {
         AddressBookService addressBookService = new AddressBookService();
         addressBookService.readAddressBookData(DB_IO);
         Map<String, Double> contactsByState = addressBookService.contactsByState(DB_IO);
