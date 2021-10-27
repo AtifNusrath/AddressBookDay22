@@ -1,5 +1,6 @@
 package com.bridgelabz;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class AddressBookService {
@@ -38,6 +39,13 @@ public class AddressBookService {
         System.out.println(addressBookData);
         boolean equals = addressBookData.get(0).equals(getAddressBookData(name));
         return equals;
+    }
+
+    public List<AddressBookData> readEmployeePayrollForDateRange(IOService ioService, LocalDate startDate, LocalDate endDate) {
+        if (ioService.equals(IOService.DB_IO)) {
+            return addressBookDBService.getEmployeePayrollForDateRange(startDate, endDate);
+        }
+        return null;
     }
 
 }
