@@ -8,6 +8,7 @@ public class AddressBookDBService {
     public Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
+    private PreparedStatement addressBookDataStatement;
     private static AddressBookDBService addressBookDBService;
 
     public AddressBookDBService() {
@@ -66,4 +67,37 @@ public class AddressBookDBService {
         return addressBookList;
     }
 
+    private void prepareStatementForAddressBook() {
+        try {
+            Connection connection = this.getConnection();
+            String sql = "SELECT * FROM addressbook WHERE `firstName` = ?";
+            addressBookDataStatement = connection.prepareStatement(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public List<AddressBookData> getAddressBookData(String firstName) {
+        List<AddressBookData> addressBookDataList = null;
+        if (this.addressBookDataStatement == null) {
+            this.prepareStatementForAddressBook();
+        }
+        try {
+            addressBookDataStatement.setString(1, firstName);
+            ResultSet resultSet = addressBookDataStatement.executeQuery();
+            addressBookDataList =this.getAddressBookData(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return addressBookDataList;
+    }
+
+    public int updateAddressBookRecord(String name, String phoneNumber) throws AddressBookException {
+        String query = String.format("update addressbook set mobileNumber = '%s' where firstName= '%s' ;", phoneNumber, name);
+        try (Connection connection = this.getConnection()) {
+            Statement statement = connection.createStatement();
+            return statement.executeUpdate(query);
+        }catch (SQLException e) {
+            throw new AddressBookException(e.getMessage(), AddressBookException.ExceptionType.DatabaseException);
+        }
+    }
 }

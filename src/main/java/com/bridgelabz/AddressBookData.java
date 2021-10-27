@@ -28,9 +28,9 @@ public class AddressBookData {
         if (this == o) return true;
         if (!(o instanceof AddressBookData)) return false;
         AddressBookData that = (AddressBookData) o;
-        return  typeId == that.typeId &&
-                Objects.equals(firstName, that.firstName) &&
-                Objects.equals(lastName, that.lastName) &&
+        return  Objects.equals(typeId,that.typeId )&&
+                firstName.equals(that.firstName) &&
+                lastName.equals(that.lastName) &&
                 Objects.equals(phoneNumber, that.phoneNumber) &&
                 Objects.equals(email, that.email) &&
                 Objects.equals(city, that.city) &&
@@ -41,7 +41,7 @@ public class AddressBookData {
     @Override
     public String toString() {
         return "AddressBookData{" +
-                ", typeId=" + typeId +
+                "typeId=" + typeId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
