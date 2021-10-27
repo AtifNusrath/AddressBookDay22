@@ -1,16 +1,14 @@
 #UC1
-create database Address_Book_Service;
+
+mysql> create database Address_Book_Service;
 show databases;
 USE Address_Book_Service;
 
 #UC2
-mysql> CREATE TABLE  addressBook
-    -> (firstName varchar(50) NOT NULL, lastName varchar(50) NOT NULL,
-    ->                         mobileNumber varchar(20) NOT NULL,email varchar(50) NOT NULL, city varchar(50) NOT NULL, state varchar(50) NOT NULL,
-    ->                         zip long NOT NULL, PRIMARY KEY(firstName));
-Query OK, 0 rows affected (4.24 sec)
+mysql> CREATE TABLE  addressBook (firstName varchar(50) NOT NULL, lastName varchar(50) NOT NULL, mobileNumber varchar(20) NOT NULL,email varchar(50) NOT NULL, city varchar(50) NOT NULL, state varchar(50) NOT NULL,
+ zip long NOT NULL, PRIMARY KEY(firstName));
 
-mysql>
+
 mysql> desc addressbook;
 +--------------+-------------+------+-----+---------+-------+
 | Field        | Type        | Null | Key | Default | Extra |
@@ -23,15 +21,13 @@ mysql> desc addressbook;
 | state        | varchar(50) | NO   |     | NULL    |       |
 | zip          | mediumtext  | NO   |     | NULL    |       |
 +--------------+-------------+------+-----+---------+-------+
-7 rows in set (0.59 sec)
+
 
 #UC3
 mysql> INSERT INTO addressbook(firstName,lastName,mobileNumber,email,city,state,zip) VALUES
-    ->                     ('Mohammed','Atif','9854712563','abc@gmail.com','Bangalore','Karnataka',560039),
-    ->                     ('Salman','Khan','9652314750','xyz@gmail.com','Bangalore','Karnataka',560001),
-    ->                     ('xyz','abc','8523697412','bca@gmail.com','Bangalore','Karnataka',560002);
-Query OK, 3 rows affected (0.49 sec)
-Records: 3  Duplicates: 0  Warnings: 0
+   ('Mohammed','Atif','9854712563','abc@gmail.com','Bangalore','Karnataka',560039),
+   ('Salman','Khan','9652314750','xyz@gmail.com','Bangalore','Karnataka',560001),
+   ('xyz','abc','8523697412','bca@gmail.com','Bangalore','Karnataka',560002);
 
 mysql> select * from addressBook;
 +-----------+----------+--------------+---------------+-----------+-----------+--------+
@@ -41,25 +37,15 @@ mysql> select * from addressBook;
 | Salman    | Khan     | 9652314750   | xyz@gmail.com | Bangalore | Karnataka | 560001 |
 | xyz       | abc      | 8523697412   | bca@gmail.com | Bangalore | Karnataka | 560002 |
 +-----------+----------+--------------+---------------+-----------+-----------+--------+
-3 rows in set (0.02 sec)
-
 
 #UC4
 mysql> UPDATE addressBook set MobileNumber= "8547120325" where FirstName='Mohammed';
-Query OK, 1 row affected (0.20 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
 
 mysql> UPDATE addressBook set Zip= "560010" where FirstName='Mohammed';
-Query OK, 1 row affected (0.28 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
 
 mysql> UPDATE addressBook set State= 'Telangana' where FirstName='Mohammed';
-Query OK, 1 row affected (0.17 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
 
 mysql> UPDATE addressBook set City= 'Hyderabad' where FirstName='Mohammed';
-Query OK, 1 row affected (0.21 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
 
 mysql> select * from addressBook;
 +-----------+----------+--------------+---------------+-----------+-----------+--------+
@@ -69,12 +55,9 @@ mysql> select * from addressBook;
 | Salman    | Khan     | 9652314750   | xyz@gmail.com | Bangalore | Karnataka | 560001 |
 | xyz       | abc      | 8523697412   | bca@gmail.com | Bangalore | Karnataka | 560002 |
 +-----------+----------+--------------+---------------+-----------+-----------+--------+
-3 rows in set (0.00 sec)
-
 
 #UC5
 mysql> DELETE from addressBook where FirstName='Mohammed';
-Query OK, 1 row affected (0.23 sec)
 
 mysql> select * from addressBook;
 +-----------+----------+--------------+---------------+-----------+-----------+--------+
@@ -83,12 +66,10 @@ mysql> select * from addressBook;
 | Salman    | Khan     | 9652314750   | xyz@gmail.com | Bangalore | Karnataka | 560001 |
 | xyz       | abc      | 8523697412   | bca@gmail.com | Bangalore | Karnataka | 560002 |
 +-----------+----------+--------------+---------------+-----------+-----------+--------+
-2 rows in set (0.00 sec)
 
 #UC6
 mysql> INSERT INTO addressbook(firstName,lastName,mobileNumber,email,city,state,zip) VALUES
-    -> ('Mohammed','Atif','9854712563','abc@gmail.com','Bangalore','Karnataka',560039);
-Query OK, 1 row affected (0.18 sec)
+    ('Mohammed','Atif','9854712563','abc@gmail.com','Bangalore','Karnataka',560039);
 
 mysql> select * from addressBook;
 +-----------+----------+--------------+---------------+-----------+-----------+--------+
@@ -98,7 +79,7 @@ mysql> select * from addressBook;
 | Salman    | Khan     | 9652314750   | xyz@gmail.com | Bangalore | Karnataka | 560001 |
 | xyz       | abc      | 8523697412   | bca@gmail.com | Bangalore | Karnataka | 560002 |
 +-----------+----------+--------------+---------------+-----------+-----------+--------+
-3 rows in set (0.02 sec)
+
 mysql> SELECT * from addressBook where city = 'Bangalore';
 +-----------+----------+--------------+---------------+-----------+-----------+--------+
 | firstName | lastName | mobileNumber | email         | city      | state     | zip    |
@@ -107,7 +88,6 @@ mysql> SELECT * from addressBook where city = 'Bangalore';
 | Salman    | Khan     | 9652314750   | xyz@gmail.com | Bangalore | Karnataka | 560001 |
 | xyz       | abc      | 8523697412   | bca@gmail.com | Bangalore | Karnataka | 560002 |
 +-----------+----------+--------------+---------------+-----------+-----------+--------+
-3 rows in set (0.00 sec)
 
 mysql> SELECT * from addressBook where state = 'Karnataka';
 +-----------+----------+--------------+---------------+-----------+-----------+--------+
@@ -117,7 +97,6 @@ mysql> SELECT * from addressBook where state = 'Karnataka';
 | Salman    | Khan     | 9652314750   | xyz@gmail.com | Bangalore | Karnataka | 560001 |
 | xyz       | abc      | 8523697412   | bca@gmail.com | Bangalore | Karnataka | 560002 |
 +-----------+----------+--------------+---------------+-----------+-----------+--------+
-3 rows in set (0.00 sec)
 
 #UC7
 mysql> SELECT city,COUNT(city) as count from addressBook group by city;
@@ -126,7 +105,6 @@ mysql> SELECT city,COUNT(city) as count from addressBook group by city;
 +-----------+-------+
 | Bangalore |     3 |
 +-----------+-------+
-1 row in set (0.00 sec)
 
 mysql> SELECT state,COUNT(state) as count from addressBook group by state;
  +-----------+-------+
@@ -134,7 +112,6 @@ mysql> SELECT state,COUNT(state) as count from addressBook group by state;
  +-----------+-------+
  | Karnataka |     3 |
  +-----------+-------+
- 1 row in set (0.00 sec)
 
 #UC8
 mysql> SELECT firstName,lastName from addressBook ORDER BY city;
@@ -145,14 +122,10 @@ mysql> SELECT firstName,lastName from addressBook ORDER BY city;
 | Salman    | Khan     |
 | xyz       | abc      |
 +-----------+----------+
-3 rows in set (0.02 sec)
-
 
 #UC9
-
 mysql> alter table addressBook add type varchar(15) after lastName ;
-Query OK, 0 rows affected (4.30 sec)
-Records: 0  Duplicates: 0  Warnings: 0
+
 
 mysql> desc addressBook;
 +--------------+-------------+------+-----+---------+-------+
@@ -167,19 +140,12 @@ mysql> desc addressBook;
 | state        | varchar(50) | NO   |     | NULL    |       |
 | zip          | mediumtext  | NO   |     | NULL    |       |
 +--------------+-------------+------+-----+---------+-------+
-8 rows in set (0.08 sec)
 
 mysql> update addressBook set type = 'Family' where firstName = 'Mohammed';
-Query OK, 1 row affected (0.45 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
 
 mysql>  update addressBook set type = 'Profession' where firstName='Salman';
-Query OK, 1 row affected (1.74 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
 
 mysql>  update addressBook set type = 'Friend' where firstName = 'xyz';
-Query OK, 1 row affected (0.30 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
 
 mysql> select * from addressBook;
 +-----------+----------+------------+--------------+---------------+-----------+-----------+--------+
@@ -189,7 +155,6 @@ mysql> select * from addressBook;
 | Salman    | Khan     | Profession | 9652314750   | xyz@gmail.com | Bangalore | Karnataka | 560001 |
 | xyz       | abc      | Friend     | 8523697412   | bca@gmail.com | Bangalore | Karnataka | 560002 |
 +-----------+----------+------------+--------------+---------------+-----------+-----------+--------+
-3 rows in set (0.00 sec)
 
 mysql> select type, Count(type) from addressBook group by type;
 +------------+-------------+
@@ -199,15 +164,12 @@ mysql> select type, Count(type) from addressBook group by type;
 | Profession |           1 |
 | Friend     |           1 |
 +------------+-------------+
-3 rows in set (0.01 sec)
 
 mysql> INSERT INTO addressbook(firstName,lastName,type,mobileNumber,email,city,state,zip) VALUES
-    -> ('Rohit','Sharma','Friend','9856321478','abc@yahoo.com','Hyderabad','Telangana',560039);
-Query OK, 1 row affected (0.14 sec)
+    ('Rohit','Sharma','Friend','9856321478','abc@yahoo.com','Hyderabad','Telangana',560039);
 
 mysql> INSERT INTO addressbook(firstName,lastName,type,mobileNumber,email,city,state,zip) VALUES
-    -> ('Virat','Kholi','Family','9632105478','xyz@yahoo.com','Mumbai','Maharashtra',560040);
-Query OK, 1 row affected (1.37 sec)
+    ('Virat','Kholi','Family','9632105478','xyz@yahoo.com','Mumbai','Maharashtra',560040);
 
 mysql> select * from addressbook;
 +-----------+----------+------------+--------------+---------------+-----------+-------------+--------+
@@ -219,13 +181,10 @@ mysql> select * from addressbook;
 | Virat     | Kholi    | Family     | 9632105478   | xyz@yahoo.com | Mumbai    | Maharashtra | 560040 |
 | xyz       | abc      | Friend     | 8523697412   | bca@gmail.com | Bangalore | Karnataka   | 560002 |
 +-----------+----------+------------+--------------+---------------+-----------+-------------+--------+
-5 rows in set (0.36 sec)
-
 
 mysql> CREATE TABLE  contacts
-    ->    (firstName varchar(50) NOT NULL, lastName varchar(50) NOT NULL,
-    ->    mobileNumber varchar(20) NOT NULL,email varchar(50) NOT NULL, PRIMARY KEY(firstName));
-Query OK, 0 rows affected (3.09 sec)
+   (firstName varchar(50) NOT NULL, lastName varchar(50) NOT NULL,
+    mobileNumber varchar(20) NOT NULL,email varchar(50) NOT NULL, PRIMARY KEY(firstName));
 
 mysql> desc contacts;
 +--------------+-------------+------+-----+---------+-------+
@@ -236,14 +195,12 @@ mysql> desc contacts;
 | mobileNumber | varchar(20) | NO   |     | NULL    |       |
 | email        | varchar(50) | NO   |     | NULL    |       |
 +--------------+-------------+------+-----+---------+-------+
-4 rows in set (0.16 sec)
 
 mysql> create table address (
-    ->    zip varchar(6) not null,
-    ->    city varchar(30) not null,
-    ->    state varchar(30) not null,
-    ->    primary key(zip));
-Query OK, 0 rows affected (2.67 sec)
+   zip varchar(6) not null,
+    city varchar(30) not null,
+    state varchar(30) not null,
+   primary key(zip));
 
 mysql> desc address;
 +-------+-------------+------+-----+---------+-------+
@@ -253,14 +210,12 @@ mysql> desc address;
 | city  | varchar(30) | NO   |     | NULL    |       |
 | state | varchar(30) | NO   |     | NULL    |       |
 +-------+-------------+------+-----+---------+-------+
-3 rows in set (0.10 sec)
 
 mysql> create table contacts_address(
-    ->   firstname varchar(30) not null,
-    ->   zip varchar(6) not null,
-    ->   foreign key (firstname) references contacts(firstname),
-    ->   foreign key (zip) references address(zip));
-Query OK, 0 rows affected (4.19 sec)
+   firstname varchar(30) not null,
+   zip varchar(6) not null,
+   foreign key (firstname) references contacts(firstname),
+   foreign key (zip) references address(zip));
 
 mysql> desc contacts_address;
 +-----------+-------------+------+-----+---------+-------+
@@ -269,12 +224,8 @@ mysql> desc contacts_address;
 | firstname | varchar(30) | NO   | MUL | NULL    |       |
 | zip       | varchar(6)  | NO   | MUL | NULL    |       |
 +-----------+-------------+------+-----+---------+-------+
-2 rows in set (0.18 sec)
 
-mysql> create table relations(
-    ->    type varchar(15),
-    ->     primary key(type));
-Query OK, 0 rows affected (2.30 sec)
+mysql> create table relations (type varchar(15),primary key(type));
 
 mysql> desc relations;
 +-------+-------------+------+-----+---------+-------+
@@ -282,14 +233,12 @@ mysql> desc relations;
 +-------+-------------+------+-----+---------+-------+
 | type  | varchar(15) | NO   | PRI | NULL    |       |
 +-------+-------------+------+-----+---------+-------+
-1 row in set (0.02 sec)
 
 mysql> create table contacts_relation(
-    ->     firstname varchar(30) not null,
-    ->     type varchar(15),
-    ->     foreign key(firstname) references contacts(firstname),
-    ->     foreign key(type) references relations(type));
-Query OK, 0 rows affected (4.56 sec)
+     firstname varchar(30) not null,
+    type varchar(15),
+    foreign key(firstname) references contacts(firstname),
+    foreign key(type) references relations(type));
 
 mysql> desc contacts_relation;
 +-----------+-------------+------+-----+---------+-------+
@@ -298,13 +247,10 @@ mysql> desc contacts_relation;
 | firstname | varchar(30) | NO   | MUL | NULL    |       |
 | type      | varchar(15) | YES  | MUL | NULL    |       |
 +-----------+-------------+------+-----+---------+-------+
-2 rows in set (0.34 sec)
 
 mysql> insert into contacts values('Rohit','Sharma','7852031478','abc@gmail.com'),
-    -> ('Virat','Kohli','6254782145','kohli@gmail.com'),
-    -> ('rani','Mukerjhe','6587425365','rani@yahoo.com');
-Query OK, 3 rows affected (0.33 sec)
-Records: 3  Duplicates: 0  Warnings: 0
+  ('Virat','Kohli','6254782145','kohli@gmail.com'),
+   ('rani','Mukerjhe','6587425365','rani@yahoo.com');
 
 mysql>  select * from contacts;
 +-----------+----------+--------------+-----------------+
@@ -314,11 +260,8 @@ mysql>  select * from contacts;
 | Rohit     | Sharma   | 7852031478   | abc@gmail.com   |
 | Virat     | Kohli    | 6254782145   | kohli@gmail.com |
 +-----------+----------+--------------+-----------------+
-3 rows in set (0.00 sec)
 
 mysql> insert into relations values('family'),('friend'),('work');
-Query OK, 3 rows affected (0.52 sec)
-Records: 3  Duplicates: 0  Warnings: 0
 
 mysql> select * from relations;
 +--------+
@@ -328,13 +271,10 @@ mysql> select * from relations;
 | friend |
 | work   |
 +--------+
-3 rows in set (0.00 sec)
 
 mysql> insert into address values ('560039','Bangalore','Karnataka'),
-    -> ('560040','Mumbai','Maharashtra'),
-    -> ('560001','Chennai','Tamil Nadu');
-Query OK, 3 rows affected (0.17 sec)
-Records: 3  Duplicates: 0  Warnings: 0
+    ('560040','Mumbai','Maharashtra'),
+    ('560001','Chennai','Tamil Nadu');
 
 mysql> select * from address;
 +--------+-----------+-------------+
@@ -344,14 +284,12 @@ mysql> select * from address;
 | 560039 | Bangalore | Karnataka   |
 | 560040 | Mumbai    | Maharashtra |
 +--------+-----------+-------------+
-3 rows in set (0.00 sec)
 
 mysql> insert into contacts_relation values
-    -> ( 'Rohit', 'friend'),
-    -> ('Virat','family'),
-    -> ('rani','work');
-Query OK, 3 rows affected (0.50 sec)
-Records: 3  Duplicates: 0  Warnings: 0
+    ( 'Rohit', 'friend'),
+  ('Virat','family'),
+   ('rani','work');
+
 
 mysql> select * from contacts_relation;
 +-----------+--------+
@@ -361,16 +299,12 @@ mysql> select * from contacts_relation;
 | Virat     | family |
 | rani      | work   |
 +-----------+--------+
-3 rows in set (0.00 sec)
 
 mysql> insert into contacts_address values ('Rohit','560001');
-Query OK, 1 row affected (0.21 sec)
 
 mysql> insert into contacts_address values ('Virat','560039');
-Query OK, 1 row affected (0.19 sec)
 
 mysql> insert into contacts_address values ('rani','560040');
-Query OK, 1 row affected (0.15 sec)
 
 mysql> select * from contacts_address;
 +-----------+--------+
@@ -380,10 +314,9 @@ mysql> select * from contacts_address;
 | Virat     | 560039 |
 | rani      | 560040 |
 +-----------+--------+
-3 rows in set (0.00 sec)
 
 
-UC13: Ensure all retrieve queries done especially in UC 6, UC 7, UC 8 and UC 10 are working with new table structure
+UC13: Ensure all retrieve queries done especially in UC 6, UC 7, UC 8 and UC 10 are working with new AStable structure
 
 mysql> select count(contacts.firstname) from contacts,contacts_address,address
     -> where contacts.firstname = contacts_address.firstname and contacts_address.zip = address.zip and address.state = 'karnataka';
@@ -392,7 +325,6 @@ mysql> select count(contacts.firstname) from contacts,contacts_address,address
 +---------------------------+
 |                         1 |
 +---------------------------+
-1 row in set (0.00 sec)
 
 mysql> select type, Count(firstName) from contacts_relation group by type;
 +--------+------------------+
@@ -402,12 +334,3 @@ mysql> select type, Count(firstName) from contacts_relation group by type;
 | friend |                1 |
 | work   |                1 |
 +--------+------------------+
-3 rows in set (0.03 sec)
-
-
-
-
-
-
-
-
